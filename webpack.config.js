@@ -10,19 +10,26 @@ module.exports = {
     },
     module: {
         rules: [
-            { 
-                test: /\.(js|jsx)$/, 
+            {
+                test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: {
-                        loader: "babel-loader",
-                }, 
+                    loader: "babel-loader",
+                },
             },
-            { 
-                test: /\.css$/, 
-                use: [MiniCssExtractPlugin.loader, 'css-loader'] 
+            {
+                test: /\.css$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader']
             }
         ]
     },
+    devServer: {
+        historyApiFallback: true,
+        contentBase: './',
+        hot: true
+    },
+
+    devtool: 'source-map',
     mode: 'development',
     plugins: [
 

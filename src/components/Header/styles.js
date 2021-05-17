@@ -10,4 +10,10 @@ export default makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  link: {
+    textDecoration: "none",
+    color: "inherit",
+    marginRight: "20px",
+  },
+
 }));
