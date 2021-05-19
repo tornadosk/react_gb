@@ -1,56 +1,76 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useParams, Redirect } from 'react-router-dom';
+import { Message } from '../Message/Message';
 import { AUTHORS } from '../../utils/constants';
-import { TextField, Button } from '@material-ui/core';
+import { ChatList } from '../ChatList/ChatList';
+import { Grid, Divider } from '@material-ui/core';
 import useStyles from './styles';
+import { useDispatch, useSelector } from 'react-redux';
+import { addMessage } from '../../store/messages/actions';
 
+const getMessageClassName = (author) => {
+    return `message ${author === AUTHORS.BOT ? "bot-message" : "human-message"}`;
+};
 
-export const MessageField = ({ onAddMessage }) => {
-    const [text, setText] = useState('');
-    const input = useRef();
+const MessageField = () => {
+    const messages = useSelector(state => state.messages.messagesList);
+    const dispatch = useDispatch();
 
     const classes = useStyles();
+    const { chatId } = useParams();
 
-    const handleChange = (e) => {
-        setText(e.target.value);
-    }
+    const handleAddMessage = useCallback(
+        (newMessage) => {
+            // onAddMessage(newMessage, chatId)
+            dispatch(addMessage(newMessage, chatId));
+        },
+        [chatId, dispatch]
+    );
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        onAddMessage({ author: AUTHORS.HUMAN, text });
-        setText('');
-    }
     useEffect(() => {
-        input.current.focus();
-    }, []);
+        let timeout;
+        if (!messages[chatId]?.length) {
+            return;
+        }
+        const lastMessage = messages[chatId]?.[messages[chatId]?.length - 1];
+        if (lastMessage.author === AUTHORS.HUMAN) {
+            timeout = setTimeout(() => {
+                handleAddMessage({ author: AUTHORS.BOT, text: "I'am Bot" });
+            }, 1500);
+
+        }
+
+        return () => clearTimeout(timeout);
+    }, [messages]);
+
+    if (!chatId || !messages[chatId]) {
+        return <Redirect to="/" />
+    }
 
     return (
+        <>
+            <Grid container spacing={3}>
 
-        <form className={classes.form} onSubmit={handleSubmit}>
-            {/* <input type="text" ref={input} /> */}
-            <TextField
-                id="standard-basic"
-                value={text}
-                onChange={handleChange}
-                label="Enter your message"
-                inputRef={input}
-                size="medium"
-                variant="outlined"
-                className={classes.field}
-            // fullWidth="true"
+                <Grid item xs={3}>
+                    <ChatList />
+                </Grid>
+                <Grid item xs={8}>
+                    <div className={classes.flex}>
+                        {messages[chatId].map((message, i) => (
+                            <div key={i} className={getMessageClassName(message.author)}>
+                                {message.author}: <Divider></Divider>{message.text}
+                            </div>
+                        ))}
+                    </div>
+                </Grid>
+                <Grid item xs={12}>
+                    <Message onAddMessage={handleAddMessage} />
+                </Grid>
+            </Grid>
 
-            />
-
-            <Button
-                type="submit"
-                variant="outlined"
-                color="inherit"
-                className={classes.button}>
-                Send
-                </Button>
-
-        </form>
+        </>
     );
-}
 
+};
 
+export default MessageField;

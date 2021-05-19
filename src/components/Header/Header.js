@@ -7,11 +7,15 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import useStyles from './styles';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 
-export default function Header() {
+export const Header = () => {
   const classes = useStyles();
+  const userName = useSelector(state => state.profile.profileName);
+  console.log(userName);
+  const [lastItem] = userName.slice(-1)
 
   return (
     <div className={classes.root}>
@@ -23,6 +27,9 @@ export default function Header() {
           <Typography variant="h6" className={classes.title}>
             <Link className={classes.link} to="/">Chat List</Link>
             <Link className={classes.link} to="/profile">Profile</Link>
+          </Typography>
+          <Typography variant="h6" className={classes.title}>
+            Hello, {lastItem}
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>
