@@ -2,7 +2,6 @@ import { Button, ListItem, TextField } from '@material-ui/core'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addProfileName } from '../../store/profile/actions';
-import { v4 as uuidv4 } from 'uuid';
 
 const Profile = () => {
 

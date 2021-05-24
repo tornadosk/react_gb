@@ -4,3 +4,4 @@ export const addChat = (newChat) => ({
     type: ADD_CHAT,
     payload: newChat,
 });
+

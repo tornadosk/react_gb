@@ -14,7 +14,6 @@ import { useSelector } from 'react-redux';
 export const Header = () => {
   const classes = useStyles();
   const userName = useSelector(state => state.profile.profileName);
-  console.log(userName);
   const [lastItem] = userName.slice(-1)
 
   return (

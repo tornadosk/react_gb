@@ -9,6 +9,7 @@ import { addChat } from '../../store/chats/actions';
 
 export const ChatList = () => {
     const chats = useSelector(state => state.chats.chatList);
+    const newMessage = useSelector(state => state.messages.isUpdate);
     const dispatch = useDispatch();
     const [value, setValue] = useState('');
     const handleChange = (e) => {
@@ -20,12 +21,21 @@ export const ChatList = () => {
             setValue('');
         }
     }
+    //
+    //     const getChatClass = (newMessage) => {
+
+    //         newMessage.map(chatStutus) => (
+    //                 if (!chatStatus.isUpdate) {
+    //     return `newUpdate`
+    // }
+    //             )}
+    // }className={getChatClass(chat.id)}
 
     return (
         <>
             <div>
                 {chats.map((chat) => (
-                    <Link to={`/chats/${chat.id}`} key={chat.id} style={{ textDecoration: "none", color: "inherit" }}>
+                    <Link to={`/chats/${chat.id}`} key={chat.id} style={{ textDecoration: "none", color: "inherit" }} >
                         <ListItem button >
                             <ListItemText>
                                 {chat.name}

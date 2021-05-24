@@ -1,8 +1,10 @@
 import { ADD_CHAT } from "../chats/actions";
-import { ADD_MESSAGE } from "./actions"
+import { ADD_MESSAGE } from "./actions";
+import { IS_UPDATE } from "./actions";
 
 const initialState = {
     messagesList: {},
+    isUpdate: {}, // newMessgeBot: false,
 };
 
 export const messagesReducer = (state = initialState, action) => {
@@ -20,10 +22,24 @@ export const messagesReducer = (state = initialState, action) => {
                 },
             };
         }
+        // case IS_UPDATE:
+        //     return {
+        //         ...state,
+        //         isUpdate:
+        //         {
+        //             ...state.isUpdate,
+        //             [action.payload.chatId]: [
+        //                 ...state.isUpdate[action.payload.chatId], action.payload.isUpdate,
+        //             ],
+
+
+        //         },
+        //     };
         case ADD_CHAT: {
             return {
                 ...state,
-                messagesList: {
+                messagesList:
+                {
                     ...state.messagesList,
                     [action.payload.id]: [],
                 }
