@@ -26,6 +26,7 @@ export const Header = () => {
           <Typography variant="h6" className={classes.title}>
             <Link className={classes.link} to="/">Chat List</Link>
             <Link className={classes.link} to="/profile">Profile</Link>
+            <Link className={classes.link} to="/marketpage">Market Page</Link>
           </Typography>
           <Typography variant="h6" className={classes.title}>
             Hello, {lastItem}

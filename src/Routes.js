@@ -5,6 +5,7 @@ import { Header } from './components/Header/Header';
 import MessageField from './components/MessageField/MessageField';
 import { ChatList } from './components/ChatList/ChatList';
 import Profile from './components/Profile/Profile';
+import { MarketPage } from './components/MarketPage/marketPage';
 
 export const Routes = () => {
 
@@ -23,6 +24,9 @@ export const Routes = () => {
                 </Route>
                 <Route path="/profile">
                     <Profile />
+                </Route>
+                <Route path="/marketpage">
+                    <MarketPage />
                 </Route>
                 <Route>
                     <div>This is my 404</div>

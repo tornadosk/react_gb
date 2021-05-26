@@ -5,6 +5,7 @@ import { messagesReducer } from './messages/reducer';
 import { profileReducer } from './profile/reducer';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { marketPricesReducer } from './marketPage/reducer';
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -19,6 +20,7 @@ const persistedReducer = persistReducer(
             chats: chatsReducer,
             messages: messagesReducer,
             profile: profileReducer,
+            marketPage: marketPricesReducer,
         }
     )
 );

@@ -26,7 +26,7 @@ module.exports = {
     },
     devServer: {
         historyApiFallback: true,
-        contentBase: './',
+        contentBase: '/api/', ///if using api thats where problem might be(!)
         hot: true
     },
 

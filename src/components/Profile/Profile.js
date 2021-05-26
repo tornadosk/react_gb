@@ -21,7 +21,7 @@ const Profile = () => {
     return (
         <div>
             This is your Profile Page,
-            <ListItem>{lastItem} </ListItem>
+            <ListItem>Your Name is: {lastItem} </ListItem>
             <ListItem>
                 <TextField value={value} onChange={handleChange} />
                 <Button onClick={handleAddName}>Add your name</Button>
