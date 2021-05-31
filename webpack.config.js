@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+
 module.exports = {
     entry: path.join(__dirname, "src", "index.js"),
     output: {
@@ -26,7 +27,7 @@ module.exports = {
     },
     devServer: {
         historyApiFallback: true,
-        contentBase: '/api/', ///if using api thats where problem might be(!)
+        contentBase: '/api/', ///if using api thats where problem
         hot: true
     },
 
